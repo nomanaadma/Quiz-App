@@ -12,3 +12,7 @@ body {
     border-color: rgb(107 107 107 / 23%) !important;
 } */
 
+.css-1vmnjpn-skeletonStyles-Skeleton {
+	background-color: #f3f4f8 !important;
+    background-image: linear-gradient( 90deg,#f3f4f8,#ffffff78,#f3f4f8 ) !important;
+}

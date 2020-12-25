@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { QuizSettingsPropsType } from '../types/quiz_types';
+import { QuizSettingsPropsType } from '../types/QuizTypes';
 import {
 	TextField,
 	FormControl,
@@ -12,6 +12,8 @@ import {
 	Paper,
 	Container,
 } from '@material-ui/core';
+import { QuestionType } from '../types/QuizTypes';
+import { getQuizDetails } from '../services/QuizService';
 
 const useStyles = makeStyles({
 	quizSettings: {
@@ -39,6 +41,10 @@ const QuizSettings: React.FC<QuizSettingsPropsType> = ({
 	categoryState,
 	questionsLimitState,
 	levelState,
+	loadingState,
+	settingState,
+	requestState,
+	questionDataState,
 }) => {
 	const classes = useStyles();
 	return (
@@ -48,8 +54,23 @@ const QuizSettings: React.FC<QuizSettingsPropsType> = ({
 					Quiz Options
 				</Typography>
 				<form
-					onSubmit={(e: React.FormEvent<EventTarget>) => {
+					onSubmit={async (e: React.FormEvent<EventTarget>) => {
 						e.preventDefault();
+						settingState[1](false);
+						loadingState[1](true);
+
+						const QuestionData: QuestionType[] = await getQuizDetails(
+							questionsLimitState[0],
+							categoryState[0],
+							levelState[0]
+						);
+
+						loadingState[1](false);
+						requestState[1](true);
+
+						questionDataState[1](QuestionData);
+
+						console.log(QuestionData);
 					}}
 				>
 					<FormControl
