@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { QuizSettingsPropsType } from '../types/QuizTypes';
+import { QuizSettingsPropsType, UserAnswerType } from '../types/QuizTypes';
 import {
 	TextField,
 	FormControl,
@@ -45,6 +45,7 @@ const QuizSettings: React.FC<QuizSettingsPropsType> = ({
 	settingState,
 	requestState,
 	questionDataState,
+	userAnswerState,
 }) => {
 	const classes = useStyles();
 	return (
@@ -65,12 +66,19 @@ const QuizSettings: React.FC<QuizSettingsPropsType> = ({
 							levelState[0]
 						);
 
-						loadingState[1](false);
-						requestState[1](true);
-
 						questionDataState[1](QuestionData);
 
-						console.log(QuestionData);
+						const userAnswerNullState = Array.apply(
+							null,
+							Array(QuestionData.length)
+						).map(function (x, i): UserAnswerType {
+							return { step: i, answer: '' };
+						});
+
+						userAnswerState[1](userAnswerNullState);
+
+						loadingState[1](false);
+						requestState[1](true);
 					}}
 				>
 					<FormControl

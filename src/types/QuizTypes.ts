@@ -1,3 +1,8 @@
+export type UserAnswerType = {
+	step: number;
+	answer: string;
+};
+
 export type QuestionType = {
 	question: string;
 	answer: string;
@@ -16,6 +21,10 @@ export type QuizSettingsPropsType = {
 		QuestionType[],
 		React.Dispatch<React.SetStateAction<QuestionType[]>>
 	];
+	userAnswerState: [
+		UserAnswerType[],
+		React.Dispatch<React.SetStateAction<UserAnswerType[]>>
+	];
 };
 
 export type Quiz = {
@@ -25,4 +34,16 @@ export type Quiz = {
 	incorrect_answers: string[];
 	question: string;
 	type: string;
+};
+
+export type QuestionAnswersPropsType = {
+	stepState: [number, React.Dispatch<React.SetStateAction<number>>];
+	requestState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+	resultState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+	totalQuestions: number;
+	contents: QuestionType;
+	userAnswerState: [
+		UserAnswerType[],
+		React.Dispatch<React.SetStateAction<UserAnswerType[]>>
+	];
 };

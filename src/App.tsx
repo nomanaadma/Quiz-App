@@ -6,7 +6,7 @@ import QuestionAnswers from './components/QuestionAnswers';
 import QuestionAnswersLoader from './components/QuestionAnswersLoader';
 import Result from './components/Result';
 import { useState } from 'react';
-import { QuestionType } from './types/QuizTypes';
+import { QuestionType, UserAnswerType } from './types/QuizTypes';
 
 function App() {
 	// Quiz Settings to send to api
@@ -24,6 +24,8 @@ function App() {
 
 	const stepState = useState<number>(0);
 
+	const userAnswerState = useState<UserAnswerType[]>([]);
+
 	return (
 		<Box component="div">
 			<Container maxWidth="xl">
@@ -38,10 +40,20 @@ function App() {
 						settingState={settingState}
 						requestState={requestState}
 						questionDataState={questionDataState}
+						userAnswerState={userAnswerState}
 					/>
 				)}
 				{loadingState[0] && <QuestionAnswersLoader />}
-				{requestState[0] && <QuestionAnswers />}
+				{requestState[0] && (
+					<QuestionAnswers
+						contents={questionDataState[0][stepState[0]]}
+						stepState={stepState}
+						requestState={requestState}
+						resultState={resultState}
+						totalQuestions={questionsLimitState[0]}
+						userAnswerState={userAnswerState}
+					/>
+				)}
 				{resultState[0] && <Result />}
 			</Container>
 		</Box>
