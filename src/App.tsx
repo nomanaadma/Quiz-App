@@ -2,6 +2,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Header from './components/Header';
 import QuizSettings from './components/QuizSettings';
+import QuestionAnswers from './components/QuestionAnswers';
 import { useState } from 'react';
 
 function App() {
@@ -19,14 +20,8 @@ function App() {
 					categoryState={categoryState}
 					questionsLimitState={questionsLimitState}
 					levelState={levelState}
-					// setName={nameState}
-					// questions={questions}
-					// setQuestions={setQuestions}
-					// level={level}
-					// category={category}
-					// setCategory={setCategory}
-					// setLevel={setLevel}
 				/>
+				<QuestionAnswers />
 			</Container>
 		</Box>
 	);

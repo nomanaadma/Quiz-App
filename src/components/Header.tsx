@@ -1,4 +1,4 @@
-import logo from '../logo.png';
+import logo from '../images/logo.png';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({

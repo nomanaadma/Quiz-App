@@ -1,3 +1,4 @@
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { QuizSettingsPropsType } from '../types/quiz_types';
@@ -7,15 +8,15 @@ import {
 	InputLabel,
 	Select,
 	MenuItem,
+	Button,
+	Paper,
+	Container,
 } from '@material-ui/core';
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles({
 	quizSettings: {
 		marginTop: '30px',
+		marginBottom: '30px',
 		padding: '20px',
 		borderRadius: '20px',
 	},
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
 	button: {
 		display: 'block',
 		margin: '0 auto',
-		marginBottom: '8px',
+		marginBottom: '6px',
 	},
 });
 
