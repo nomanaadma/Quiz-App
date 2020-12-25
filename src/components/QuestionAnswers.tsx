@@ -1,4 +1,4 @@
-import { Paper, Container, Typography } from '@material-ui/core';
+import { Paper, Container, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import check from '../images/check.svg';
 import unCheck from '../images/uncheck.svg';
@@ -31,14 +31,21 @@ const useStyles = makeStyles({
 		padding: '20px',
 		margin: '30px 0',
 	},
+	score: {
+		textAlign: 'center',
+	},
 });
 
 const Quiz = () => {
 	const classes = useStyles();
 	return (
 		<Container maxWidth="sm">
+			<div className={classes.score}>
+				<Typography variant="h4">Score: 0</Typography>
+				<Typography variant="h6">Question: 1 out of 5</Typography>
+			</div>
 			<div className={classes.container}>
-				<Typography variant="h4" className={classes.heading}>
+				<Typography variant="h5" className={classes.heading}>
 					What do you do and when do you do?
 				</Typography>
 				<Paper
@@ -75,6 +82,11 @@ const Quiz = () => {
 					/>
 					<span>Answer 4</span>
 				</Paper>
+
+				<div>
+					<Button variant="contained">Previous</Button>
+					<Button variant="contained">Next</Button>
+				</div>
 			</div>
 		</Container>
 	);

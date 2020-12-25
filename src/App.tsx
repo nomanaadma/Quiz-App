@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Header from './components/Header';
 import QuizSettings from './components/QuizSettings';
 import QuestionAnswers from './components/QuestionAnswers';
+import Result from './components/Result';
 import { useState } from 'react';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 					levelState={levelState}
 				/>
 				<QuestionAnswers />
+				<Result />
 			</Container>
 		</Box>
 	);
