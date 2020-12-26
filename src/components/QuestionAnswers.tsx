@@ -1,8 +1,9 @@
-import { Paper, Container, Typography, Button } from '@material-ui/core';
+import { Paper, Container, Typography, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import check from '../images/check.svg';
 import unCheck from '../images/uncheck.svg';
 import { QuestionAnswersPropsType, QuestionType } from '../types/QuizTypes';
+import { primaryButton, getScore } from '../utils/Common';
 
 const useStyles = makeStyles({
 	answerContainer: {
@@ -12,10 +13,12 @@ const useStyles = makeStyles({
 		display: 'flex',
 		backgroundColor: '#e5e8ef',
 		cursor: 'pointer',
+		fontFamily: 'Montserrat',
 	},
 	heading: {
 		marginBottom: '30px',
 		textAlign: 'center',
+		fontFamily: 'Roboto Slab',
 	},
 	checkbox: {
 		width: 15,
@@ -27,17 +30,21 @@ const useStyles = makeStyles({
 	wrongAnswer: {
 		backgroundColor: '#ffa4a4',
 	},
-	container: {
-		backgroundColor: '#fff',
-		borderRadius: '20px',
-		padding: '20px',
-		margin: '30px 0',
-	},
 	score: {
+		marginTop: '20px',
 		textAlign: 'center',
 	},
 	disabled: {
 		pointerEvents: 'none',
+	},
+	buttonContainer: {
+		display: 'grid',
+		gridGap: '12px',
+		gridTemplateColumns: '1fr 1fr',
+		gridTemplateAreas: "'a b'",
+	},
+	button: {
+		...primaryButton,
 	},
 });
 
@@ -53,15 +60,6 @@ const getquestionDataStateArray = (
 		return obj;
 	});
 };
-
-function getScore(data: QuestionType[]): number {
-	let score = 0;
-
-	for (const questionObj of data)
-		if (questionObj.userAnswer === questionObj.answer) score++;
-
-	return score;
-}
 
 const Quiz: React.FC<QuestionAnswersPropsType> = ({
 	stepState,
@@ -83,7 +81,12 @@ const Quiz: React.FC<QuestionAnswersPropsType> = ({
 					Question: {stepState[0] + 1} out of {totalQuestions}
 				</Typography>
 			</div>
-			<div className={classes.container}>
+			<Box
+				style={{ backgroundColor: '#fff' }}
+				borderRadius={20}
+				my={'20px'}
+				p={'20px'}
+			>
 				<Typography variant="h5" className={classes.heading}>
 					{contents.question}
 				</Typography>
@@ -142,9 +145,11 @@ const Quiz: React.FC<QuestionAnswersPropsType> = ({
 					);
 				})}
 
-				<div>
+				<div className={classes.buttonContainer}>
 					{stepState[0] !== 0 && (
 						<Button
+							className={classes.button}
+							color="primary"
 							variant="contained"
 							onClick={(
 								e: React.MouseEvent<HTMLButtonElement>
@@ -158,6 +163,9 @@ const Quiz: React.FC<QuestionAnswersPropsType> = ({
 
 					{contents.userAnswer !== '' && (
 						<Button
+							className={classes.button}
+							style={{ gridArea: 'b' }}
+							color="primary"
 							variant="contained"
 							onClick={(
 								e: React.MouseEvent<HTMLButtonElement>
@@ -169,11 +177,13 @@ const Quiz: React.FC<QuestionAnswersPropsType> = ({
 								}
 							}}
 						>
-							Next
+							{stepState[0] === totalQuestions - 1
+								? 'Result'
+								: 'Next'}
 						</Button>
 					)}
 				</div>
-			</div>
+			</Box>
 		</Container>
 	);
 };

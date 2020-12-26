@@ -1,14 +1,8 @@
 import Skeleton from 'react-loading-skeleton';
-import { Container } from '@material-ui/core';
+import { Container, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-	container: {
-		backgroundColor: '#fff',
-		borderRadius: '20px',
-		padding: '20px',
-		margin: '30px 0',
-	},
 	button: {
 		display: 'grid',
 		gridGap: '12px',
@@ -20,7 +14,12 @@ const QuestionAnswersLoader = () => {
 	const classes = useStyles();
 	return (
 		<Container maxWidth="sm">
-			<div className={classes.container}>
+			<Box
+				style={{ backgroundColor: '#fff' }}
+				borderRadius={20}
+				my={'30px'}
+				p={'20px'}
+			>
 				<Skeleton height={100} style={{ marginBottom: '8px' }} />
 				<Skeleton
 					count={4}
@@ -31,7 +30,7 @@ const QuestionAnswersLoader = () => {
 					<Skeleton height={30} />
 					<Skeleton height={30} />
 				</div>
-			</div>
+			</Box>
 		</Container>
 	);
 };

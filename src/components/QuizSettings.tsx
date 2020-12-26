@@ -9,31 +9,28 @@ import {
 	Select,
 	MenuItem,
 	Button,
-	Paper,
+	Box,
 	Container,
 } from '@material-ui/core';
 import { QuestionType } from '../types/QuizTypes';
 import { getQuizDetails } from '../services/QuizService';
 import { Categories } from '../services/QuizCategories';
+import { primaryButton } from '../utils/Common';
 
 const useStyles = makeStyles({
-	quizSettings: {
-		marginTop: '30px',
-		marginBottom: '30px',
-		padding: '20px',
-		borderRadius: '20px',
-	},
 	field: {
 		marginBottom: '20px',
 	},
 	heading: {
 		marginBottom: '20px',
 		textAlign: 'center',
+		fontFamily: 'Roboto Slab',
 	},
 	button: {
 		display: 'block',
 		margin: '0 auto',
 		marginBottom: '6px',
+		...primaryButton,
 	},
 });
 
@@ -50,7 +47,12 @@ const QuizSettings: React.FC<QuizSettingsPropsType> = ({
 	const classes = useStyles();
 	return (
 		<Container maxWidth="sm">
-			<Paper className={classes.quizSettings} elevation={0}>
+			<Box
+				style={{ backgroundColor: '#fff' }}
+				borderRadius={20}
+				my={'30px'}
+				p={'20px'}
+			>
 				<Typography variant="h5" className={classes.heading}>
 					Quiz Options
 				</Typography>
@@ -187,7 +189,7 @@ const QuizSettings: React.FC<QuizSettingsPropsType> = ({
 						Start Quiz
 					</Button>
 				</form>
-			</Paper>
+			</Box>
 		</Container>
 	);
 };
