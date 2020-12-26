@@ -6,10 +6,9 @@ import QuestionAnswers from './components/QuestionAnswers';
 import QuestionAnswersLoader from './components/QuestionAnswersLoader';
 import Result from './components/Result';
 import { useState } from 'react';
-import { QuestionType, UserAnswerType } from './types/QuizTypes';
+import { QuestionType } from './types/QuizTypes';
 
 function App() {
-	// Quiz Settings to send to api
 	const nameState = useState<string>('');
 	const categoryState = useState<number>(9);
 	const questionsLimitState = useState<number>(5);
@@ -23,8 +22,6 @@ function App() {
 	const questionDataState = useState<QuestionType[]>([]);
 
 	const stepState = useState<number>(0);
-
-	const userAnswerState = useState<UserAnswerType[]>([]);
 
 	return (
 		<Box component="div">
@@ -40,21 +37,28 @@ function App() {
 						settingState={settingState}
 						requestState={requestState}
 						questionDataState={questionDataState}
-						userAnswerState={userAnswerState}
 					/>
 				)}
 				{loadingState[0] && <QuestionAnswersLoader />}
 				{requestState[0] && (
 					<QuestionAnswers
-						contents={questionDataState[0][stepState[0]]}
 						stepState={stepState}
 						requestState={requestState}
 						resultState={resultState}
 						totalQuestions={questionsLimitState[0]}
-						userAnswerState={userAnswerState}
+						questionDataState={questionDataState}
 					/>
 				)}
-				{resultState[0] && <Result />}
+				{resultState[0] && (
+					<Result
+						levelState={levelState[0]}
+						categoryState={categoryState[0]}
+						questionDataState={questionDataState}
+						setResult={resultState[1]}
+						setSetting={settingState[1]}
+						setStep={stepState[1]}
+					/>
+				)}
 			</Container>
 		</Box>
 	);

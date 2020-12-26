@@ -1,5 +1,7 @@
 import { Container, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { ResultPropsType, QuestionType } from '../types/QuizTypes';
+import { Categories } from '../services/QuizCategories';
 
 const useStyles = makeStyles({
 	container: {
@@ -26,7 +28,23 @@ const useStyles = makeStyles({
 	},
 });
 
-const Result = () => {
+function getScore(data: QuestionType[]): number {
+	let score = 0;
+
+	for (const questionObj of data)
+		if (questionObj.userAnswer === questionObj.answer) score++;
+
+	return score;
+}
+
+const Result: React.FC<ResultPropsType> = ({
+	levelState,
+	categoryState,
+	questionDataState: data,
+	setResult,
+	setSetting,
+	setStep,
+}) => {
 	const classes = useStyles();
 	return (
 		<Container maxWidth="xs">
@@ -47,21 +65,21 @@ const Result = () => {
 						variant="subtitle2"
 						className={classes.propertyContent}
 					>
-						10
+						{data[0].length}
 					</Typography>
 					<Typography variant="subtitle2">Score</Typography>
 					<Typography
 						variant="subtitle2"
 						className={classes.propertyContent}
 					>
-						5
+						{getScore(data[0])}
 					</Typography>
 					<Typography variant="subtitle2">Percentage</Typography>
 					<Typography
 						variant="subtitle2"
 						className={classes.propertyContent}
 					>
-						50%
+						{(getScore(data[0]) / data[0].length) * 100}%
 					</Typography>
 					<Typography variant="subtitle2">
 						Difficulty Level
@@ -70,18 +88,28 @@ const Result = () => {
 						variant="subtitle2"
 						className={classes.propertyContent}
 					>
-						Easy
+						{levelState.toUpperCase()}
 					</Typography>
 					<Typography variant="subtitle2">Category</Typography>
 					<Typography
 						variant="subtitle2"
 						className={classes.propertyContent}
 					>
-						General Knowledge
+						{Categories[categoryState]}
 					</Typography>
 				</div>
 				<div className={classes.button}>
-					<Button variant="contained">Try Again</Button>
+					<Button
+						variant="contained"
+						onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+							setResult(false);
+							setSetting(true);
+							setStep(0);
+							data[1]([]);
+						}}
+					>
+						Try Again
+					</Button>
 				</div>
 			</div>
 		</Container>

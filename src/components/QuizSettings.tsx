@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { QuizSettingsPropsType, UserAnswerType } from '../types/QuizTypes';
+import { QuizSettingsPropsType } from '../types/QuizTypes';
 import {
 	TextField,
 	FormControl,
@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import { QuestionType } from '../types/QuizTypes';
 import { getQuizDetails } from '../services/QuizService';
+import { Categories } from '../services/QuizCategories';
 
 const useStyles = makeStyles({
 	quizSettings: {
@@ -45,7 +46,6 @@ const QuizSettings: React.FC<QuizSettingsPropsType> = ({
 	settingState,
 	requestState,
 	questionDataState,
-	userAnswerState,
 }) => {
 	const classes = useStyles();
 	return (
@@ -67,15 +67,6 @@ const QuizSettings: React.FC<QuizSettingsPropsType> = ({
 						);
 
 						questionDataState[1](QuestionData);
-
-						const userAnswerNullState = Array.apply(
-							null,
-							Array(QuestionData.length)
-						).map(function (x, i): UserAnswerType {
-							return { step: i, answer: '' };
-						});
-
-						userAnswerState[1](userAnswerNullState);
 
 						loadingState[1](false);
 						requestState[1](true);
@@ -118,24 +109,18 @@ const QuizSettings: React.FC<QuizSettingsPropsType> = ({
 							required
 							label="Category"
 						>
-							<MenuItem className="form-menu-item" value={9}>
-								General Knowledge
-							</MenuItem>
-							<MenuItem className="form-menu-item" value={11}>
-								Movies
-							</MenuItem>
-							<MenuItem className="form-menu-item" value={17}>
-								Science
-							</MenuItem>
-							<MenuItem className="form-menu-item" value={18}>
-								Computers
-							</MenuItem>
-							<MenuItem className="form-menu-item" value={19}>
-								Mathematics
-							</MenuItem>
-							<MenuItem className="form-menu-item" value={21}>
-								Sports
-							</MenuItem>
+							{Object.keys(Categories).map((key, index) => {
+								const categoryId = Number(key);
+								return (
+									<MenuItem
+										key={index}
+										className="form-menu-item"
+										value={categoryId}
+									>
+										{Categories[categoryId]}
+									</MenuItem>
+								);
+							})}
 						</Select>
 					</FormControl>
 					<FormControl

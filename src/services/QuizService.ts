@@ -19,6 +19,7 @@ export const getQuizDetails = async (
 	const quiz: QuestionType[] = results.map(
 		(questionObj: Quiz): QuestionType => {
 			return {
+				userAnswer: '',
 				question: questionObj.question,
 				answer: questionObj.correct_answer,
 				options: shuffleAnswers(

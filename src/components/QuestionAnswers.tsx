@@ -2,7 +2,7 @@ import { Paper, Container, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import check from '../images/check.svg';
 import unCheck from '../images/uncheck.svg';
-import { QuestionAnswersPropsType, UserAnswerType } from '../types/QuizTypes';
+import { QuestionAnswersPropsType, QuestionType } from '../types/QuizTypes';
 
 const useStyles = makeStyles({
 	answerContainer: {
@@ -41,33 +41,44 @@ const useStyles = makeStyles({
 	},
 });
 
-const getNewUserAnswer = (
-	step: number,
+const getquestionDataStateArray = (
 	answer: string,
-	userAnswerState: UserAnswerType[]
-): UserAnswerType[] => {
-	return userAnswerState.map(obj => {
-		if (obj.step === step) {
-			obj.answer = answer;
+	step: number,
+	questionDataState: QuestionType[]
+): QuestionType[] => {
+	return questionDataState.map((obj, index) => {
+		if (index === step) {
+			obj.userAnswer = answer;
 		}
-
 		return obj;
 	});
 };
+
+function getScore(data: QuestionType[]): number {
+	let score = 0;
+
+	for (const questionObj of data)
+		if (questionObj.userAnswer === questionObj.answer) score++;
+
+	return score;
+}
 
 const Quiz: React.FC<QuestionAnswersPropsType> = ({
 	stepState,
 	totalQuestions,
 	requestState,
 	resultState,
-	contents,
-	userAnswerState,
+	questionDataState,
 }) => {
+	const contents = questionDataState[0][stepState[0]];
+
 	const classes = useStyles();
 	return (
 		<Container maxWidth="sm">
 			<div className={classes.score}>
-				<Typography variant="h4">Score: 0</Typography>
+				<Typography variant="h4">
+					Score: {getScore(questionDataState[0])}
+				</Typography>
 				<Typography variant="h6">
 					Question: {stepState[0] + 1} out of {totalQuestions}
 				</Typography>
@@ -79,8 +90,7 @@ const Quiz: React.FC<QuestionAnswersPropsType> = ({
 				{contents.options.map((answer, key) => {
 					let classNames = classes.answerContainer;
 
-					const userSelectedAnswer =
-						userAnswerState[0][stepState[0]].answer;
+					const userSelectedAnswer = contents.userAnswer;
 
 					let image = unCheck;
 
@@ -113,12 +123,13 @@ const Quiz: React.FC<QuestionAnswersPropsType> = ({
 							elevation={0}
 							key={key}
 							onClick={(e: React.MouseEvent) => {
-								const generatedUserAnswer = getNewUserAnswer(
-									stepState[0],
+								const questionDataStateArray = getquestionDataStateArray(
 									answer,
-									userAnswerState[0]
+									stepState[0],
+									questionDataState[0]
 								);
-								userAnswerState[1](generatedUserAnswer);
+
+								questionDataState[1](questionDataStateArray);
 							}}
 						>
 							<img
@@ -145,18 +156,22 @@ const Quiz: React.FC<QuestionAnswersPropsType> = ({
 						</Button>
 					)}
 
-					<Button
-						variant="contained"
-						onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-							stepState[1](++stepState[0]);
-							if (stepState[0] === totalQuestions) {
-								requestState[1](false);
-								resultState[1](true);
-							}
-						}}
-					>
-						Next
-					</Button>
+					{contents.userAnswer !== '' && (
+						<Button
+							variant="contained"
+							onClick={(
+								e: React.MouseEvent<HTMLButtonElement>
+							) => {
+								stepState[1](++stepState[0]);
+								if (stepState[0] === totalQuestions) {
+									requestState[1](false);
+									resultState[1](true);
+								}
+							}}
+						>
+							Next
+						</Button>
+					)}
 				</div>
 			</div>
 		</Container>
