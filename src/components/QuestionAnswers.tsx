@@ -4,6 +4,7 @@ import check from '../images/check.svg';
 import unCheck from '../images/uncheck.svg';
 import { QuestionAnswersPropsType, QuestionType } from '../types/QuizTypes';
 import { primaryButton, getScore } from '../utils/Common';
+import { decode } from 'he';
 
 const useStyles = makeStyles({
 	answerContainer: {
@@ -88,7 +89,7 @@ const Quiz: React.FC<QuestionAnswersPropsType> = ({
 				p={'20px'}
 			>
 				<Typography variant="h5" className={classes.heading}>
-					{contents.question}
+					{decode(contents.question)}
 				</Typography>
 				{contents.options.map((answer, key) => {
 					let classNames = classes.answerContainer;
@@ -140,7 +141,7 @@ const Quiz: React.FC<QuestionAnswersPropsType> = ({
 								alt="check"
 								className={classes.checkbox}
 							/>
-							<span>{answer}</span>
+							<span>{decode(answer)}</span>
 						</Paper>
 					);
 				})}

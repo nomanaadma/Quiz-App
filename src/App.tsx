@@ -7,6 +7,7 @@ import QuestionAnswersLoader from './components/QuestionAnswersLoader';
 import Result from './components/Result';
 import { useState } from 'react';
 import { QuestionType } from './types/QuizTypes';
+import heart from './images/heart.png';
 
 function App() {
 	const nameState = useState<string>('');
@@ -59,6 +60,37 @@ function App() {
 						setStep={stepState[1]}
 					/>
 				)}
+				<p
+					style={{
+						textAlign: 'center',
+						fontFamily: 'Montserrat',
+						margin: 0,
+						marginBottom: '28px',
+					}}
+				>
+					Made with
+					<img
+						src={heart}
+						alt="Love"
+						style={{
+							width: '19px',
+							verticalAlign: 'text-bottom',
+							margin: '0 5px',
+						}}
+					/>
+					By{' '}
+					<a
+						href="https://github.com/nomanaadma"
+						target="_blank"
+						rel="noreferrer"
+						style={{
+							textDecoration: 'none',
+							color: '#476ff5',
+						}}
+					>
+						Noman Shoukat
+					</a>
+				</p>
 			</Container>
 		</Box>
 	);

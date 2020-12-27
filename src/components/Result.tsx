@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 	},
 	buttonEl: {
 		...primaryButton,
-		backgroundColor: '#f54747',
+		backgroundColor: '#cd3a28',
 	},
 });
 

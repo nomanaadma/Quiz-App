@@ -1,4 +1,35 @@
-# Getting Started with Create React App
+# Quiz App
+
+Project #6 for [Panacloud Bootcamp 2020](https://panacloud.github.io/bootcamp-2020/). It's a Quiz App built with React, Typescript and Opentdb API.
+
+![demo](https://raw.githubusercontent.com/nomanaadma/Quiz-App/master/public/screenshots/1.png)
+
+![demo](https://raw.githubusercontent.com/nomanaadma/Quiz-App/master/public/screenshots/2.png)
+
+![demo](https://raw.githubusercontent.com/nomanaadma/Quiz-App/master/public/screenshots/3.png)
+
+![demo](https://raw.githubusercontent.com/nomanaadma/Quiz-App/master/public/screenshots/4.png)
+
+## Tech Stack
+
+-   [React](https://github.com/facebook/react/)
+-   [Typescript Template](https://create-react-app.dev/docs/adding-typescript/)
+-   [Material-UI](https://material-ui.com/)
+-   [Opentdb API](https://opentdb.com/)
+
+## Functionalities
+
+-   Select Quiz Settings
+-   Perform Quiz and Get Results
+
+## Features
+
+-   Secure
+-   Accessibility Optimized
+-   Fast
+-   Less in size
+-   SEO Optimized
+-   Mobile Responsive
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
