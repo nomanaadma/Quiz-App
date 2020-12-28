@@ -1,6 +1,6 @@
 import { Container, Typography, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { ResultPropsType } from '../types/QuizTypes';
+import { ResultProps } from '../types/QuizTypes';
 import { Categories } from '../services/QuizCategories';
 import { primaryButton, getScore } from '../utils/Common';
 
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 	},
 });
 
-const Result: React.FC<ResultPropsType> = ({
+const Result: React.FC<ResultProps> = ({
 	levelState,
 	categoryState,
 	questionDataState: data,

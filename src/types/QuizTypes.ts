@@ -1,11 +1,11 @@
-export type QuestionType = {
+export type Question = {
 	userAnswer?: string;
 	question: string;
 	answer: string;
 	options: string[];
 };
 
-export type QuizSettingsPropsType = {
+export type QuizSettingsProps = {
 	nameState: [string, React.Dispatch<React.SetStateAction<string>>];
 	categoryState: [number, React.Dispatch<React.SetStateAction<number>>];
 	questionsLimitState: [number, React.Dispatch<React.SetStateAction<number>>];
@@ -14,8 +14,8 @@ export type QuizSettingsPropsType = {
 	settingState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 	requestState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 	questionDataState: [
-		QuestionType[],
-		React.Dispatch<React.SetStateAction<QuestionType[]>>
+		Question[],
+		React.Dispatch<React.SetStateAction<Question[]>>
 	];
 };
 
@@ -28,23 +28,23 @@ export type Quiz = {
 	type: string;
 };
 
-export type QuestionAnswersPropsType = {
+export type QuestionAnswersProps = {
 	stepState: [number, React.Dispatch<React.SetStateAction<number>>];
 	requestState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 	resultState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 	totalQuestions: number;
 	questionDataState: [
-		QuestionType[],
-		React.Dispatch<React.SetStateAction<QuestionType[]>>
+		Question[],
+		React.Dispatch<React.SetStateAction<Question[]>>
 	];
 };
 
-export type ResultPropsType = {
+export type ResultProps = {
 	levelState: string;
 	categoryState: number;
 	questionDataState: [
-		QuestionType[],
-		React.Dispatch<React.SetStateAction<QuestionType[]>>
+		Question[],
+		React.Dispatch<React.SetStateAction<Question[]>>
 	];
 	setResult: React.Dispatch<React.SetStateAction<boolean>>;
 	setSetting: React.Dispatch<React.SetStateAction<boolean>>;

@@ -6,7 +6,7 @@ import QuestionAnswers from './components/QuestionAnswers';
 import QuestionAnswersLoader from './components/QuestionAnswersLoader';
 import Result from './components/Result';
 import { useState } from 'react';
-import { QuestionType } from './types/QuizTypes';
+import { Question } from './types/QuizTypes';
 import heart from './images/heart.png';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
 	const resultState = useState<boolean>(false);
 	const requestState = useState<boolean>(false);
 
-	const questionDataState = useState<QuestionType[]>([]);
+	const questionDataState = useState<Question[]>([]);
 
 	const stepState = useState<number>(0);
 

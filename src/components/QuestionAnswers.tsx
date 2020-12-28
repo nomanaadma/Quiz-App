@@ -2,7 +2,7 @@ import { Paper, Container, Typography, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import check from '../images/check.svg';
 import unCheck from '../images/uncheck.svg';
-import { QuestionAnswersPropsType, QuestionType } from '../types/QuizTypes';
+import { QuestionAnswersProps, Question } from '../types/QuizTypes';
 import { primaryButton, getScore } from '../utils/Common';
 import { decode } from 'he';
 
@@ -52,8 +52,8 @@ const useStyles = makeStyles({
 const getquestionDataStateArray = (
 	answer: string,
 	step: number,
-	questionDataState: QuestionType[]
-): QuestionType[] => {
+	questionDataState: Question[]
+): Question[] => {
 	return questionDataState.map((obj, index) => {
 		if (index === step) {
 			obj.userAnswer = answer;
@@ -62,7 +62,7 @@ const getquestionDataStateArray = (
 	});
 };
 
-const Quiz: React.FC<QuestionAnswersPropsType> = ({
+const Quiz: React.FC<QuestionAnswersProps> = ({
 	stepState,
 	totalQuestions,
 	requestState,

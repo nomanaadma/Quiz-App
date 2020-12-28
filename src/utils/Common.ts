@@ -1,4 +1,4 @@
-import { QuestionType } from '../types/QuizTypes';
+import { Question } from '../types/QuizTypes';
 
 export const primaryButton = {
 	backgroundColor: '#476ff5',
@@ -10,7 +10,7 @@ export const primaryButton = {
 	fontWeight: 600,
 };
 
-export const getScore = (data: QuestionType[]): number => {
+export const getScore = (data: Question[]): number => {
 	let score = 0;
 
 	for (const questionObj of data)
@@ -18,3 +18,7 @@ export const getScore = (data: QuestionType[]): number => {
 
 	return score;
 };
+
+// Shuffle Answers functions
+export const shuffleAnswers = (array: any[]) =>
+	[...array].sort(() => Math.random() - 0.5);
