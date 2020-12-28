@@ -1,13 +1,29 @@
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
 import Header from './components/Header';
 import QuizSettings from './components/QuizSettings';
 import QuestionAnswers from './components/QuestionAnswers';
 import QuestionAnswersLoader from './components/QuestionAnswersLoader';
+import Credits from './components/Credits';
 import Result from './components/Result';
 import { useState } from 'react';
 import { Question } from './types/QuizTypes';
-import heart from './images/heart.png';
+import lightImage from './images/background-light.png';
+import darkImage from './images/background-dark.png';
+
+const useStyles = makeStyles(theme => {
+	return {
+		body: {
+			background:
+				theme.palette.type === 'dark'
+					? `url(${darkImage}) no-repeat center center fixed, #20232a`
+					: `url(${lightImage}) no-repeat center center fixed, #84899f29`,
+			backgroundSize: '100% 100%',
+			minHeight: '100vh',
+		},
+	};
+});
 
 function App() {
 	const nameState = useState<string>('');
@@ -24,8 +40,10 @@ function App() {
 
 	const stepState = useState<number>(0);
 
+	const classes = useStyles();
+
 	return (
-		<Box component="div">
+		<Box component="div" className={classes.body}>
 			<Container maxWidth="xl">
 				<Header />
 				{settingState[0] && (
@@ -60,37 +78,7 @@ function App() {
 						setStep={stepState[1]}
 					/>
 				)}
-				<p
-					style={{
-						textAlign: 'center',
-						fontFamily: 'Montserrat',
-						margin: 0,
-						marginBottom: '28px',
-					}}
-				>
-					Made with
-					<img
-						src={heart}
-						alt="Love"
-						style={{
-							width: '19px',
-							verticalAlign: 'text-bottom',
-							margin: '0 5px',
-						}}
-					/>
-					By{' '}
-					<a
-						href="https://github.com/nomanaadma"
-						target="_blank"
-						rel="noreferrer"
-						style={{
-							textDecoration: 'none',
-							color: '#476ff5',
-						}}
-					>
-						Noman Shoukat
-					</a>
-				</p>
+				<Credits />
 			</Container>
 		</Box>
 	);

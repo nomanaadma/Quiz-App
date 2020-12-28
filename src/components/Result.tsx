@@ -4,40 +4,53 @@ import { ResultProps } from '../types/QuizTypes';
 import { Categories } from '../services/QuizCategories';
 import { primaryButton, getScore } from '../utils/Common';
 
-const useStyles = makeStyles({
-	container: {
-		backgroundColor: '#fff',
-		borderRadius: '20px',
-		padding: '20px',
-		margin: '30px 0',
-	},
-	heading: {
-		marginBottom: '30px',
-		textAlign: 'center',
-		fontFamily: 'Roboto Slab',
-	},
-	resultContainer: {
-		display: 'grid',
-		gridGap: '16px',
-		gridTemplateColumns: '1fr 1fr',
-	},
-	propertyContent: {
-		textAlign: 'right',
-		fontFamily: 'Montserrat',
-		fontWeight: 600,
-	},
-	propertyHeading: {
-		fontFamily: 'Montserrat',
-		fontWeight: 600,
-	},
-	button: {
-		textAlign: 'center',
-		margin: '30px 0 10px',
-	},
-	buttonEl: {
-		...primaryButton,
-		backgroundColor: '#cd3a28',
-	},
+const useStyles = makeStyles(theme => {
+	const type = theme.palette.type;
+
+	const styles = {
+		container: {
+			backgroundColor: '#fff',
+			borderRadius: '20px',
+			padding: '20px',
+			margin: '30px 0',
+		},
+		heading: {
+			marginBottom: '30px',
+			textAlign: 'center' as 'center',
+			fontFamily: 'Roboto Slab',
+		},
+		resultContainer: {
+			display: 'grid',
+			gridGap: '16px',
+			gridTemplateColumns: '1fr 1fr',
+		},
+		propertyContent: {
+			textAlign: 'right' as 'right',
+			fontFamily: 'Montserrat',
+			fontWeight: 600,
+		},
+		propertyHeading: {
+			fontFamily: 'Montserrat',
+			fontWeight: 600,
+		},
+		button: {
+			textAlign: 'center' as 'center',
+			margin: '30px 0 10px',
+		},
+		buttonEl: {
+			...primaryButton,
+			backgroundColor: '#cd3a28',
+		},
+		box: {
+			backgroundColor: '#fff',
+		},
+	};
+
+	if (type === 'dark') {
+		styles.box.backgroundColor = '#2b303a';
+	}
+
+	return styles;
 });
 
 const Result: React.FC<ResultProps> = ({
@@ -52,7 +65,7 @@ const Result: React.FC<ResultProps> = ({
 	return (
 		<Container maxWidth="xs">
 			<Box
-				style={{ backgroundColor: '#fff' }}
+				className={classes.box}
 				borderRadius={20}
 				my={'30px'}
 				p={'20px'}

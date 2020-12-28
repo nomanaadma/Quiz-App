@@ -16,21 +16,27 @@ import { getQuizDetails } from '../services/QuizService';
 import { Categories } from '../services/QuizCategories';
 import { primaryButton } from '../utils/Common';
 
-const useStyles = makeStyles({
-	field: {
-		marginBottom: '20px',
-	},
-	heading: {
-		marginBottom: '20px',
-		textAlign: 'center',
-		fontFamily: 'Roboto Slab',
-	},
-	button: {
-		display: 'block',
-		margin: '0 auto',
-		marginBottom: '6px',
-		...primaryButton,
-	},
+const useStyles = makeStyles(theme => {
+	const type = theme.palette.type;
+	return {
+		field: {
+			marginBottom: '20px',
+		},
+		heading: {
+			marginBottom: '20px',
+			textAlign: 'center',
+			fontFamily: 'Roboto Slab',
+		},
+		button: {
+			display: 'block',
+			margin: '0 auto',
+			marginBottom: '6px',
+			...primaryButton,
+		},
+		box: {
+			backgroundColor: type == 'dark' ? '#2b303a' : '#fff',
+		},
+	};
 });
 
 const QuizSettings: React.FC<QuizSettingsProps> = ({
@@ -44,10 +50,11 @@ const QuizSettings: React.FC<QuizSettingsProps> = ({
 	questionDataState,
 }) => {
 	const classes = useStyles();
+
 	return (
 		<Container maxWidth="sm">
 			<Box
-				style={{ backgroundColor: '#fff' }}
+				className={classes.box}
 				borderRadius={20}
 				my={'30px'}
 				p={'20px'}

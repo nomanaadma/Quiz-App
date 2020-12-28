@@ -1,52 +1,69 @@
 import { Paper, Container, Typography, Button, Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import check from '../images/check.svg';
 import unCheck from '../images/uncheck.svg';
+import checkDark from '../images/check-dark.svg';
+import unCheckDark from '../images/uncheck-dark.svg';
 import { QuestionAnswersProps, Question } from '../types/QuizTypes';
 import { primaryButton, getScore } from '../utils/Common';
 import { decode } from 'he';
 
-const useStyles = makeStyles({
-	answerContainer: {
-		marginBottom: '12px',
-		padding: '16px 25px',
-		borderRadius: '9px',
-		display: 'flex',
-		backgroundColor: '#e5e8ef',
-		cursor: 'pointer',
-		fontFamily: 'Montserrat',
-	},
-	heading: {
-		marginBottom: '30px',
-		textAlign: 'center',
-		fontFamily: 'Roboto Slab',
-	},
-	checkbox: {
-		width: 15,
-		marginRight: 10,
-	},
-	correctAnswer: {
-		backgroundColor: '#8fd8a0',
-	},
-	wrongAnswer: {
-		backgroundColor: '#ffa4a4',
-	},
-	score: {
-		marginTop: '20px',
-		textAlign: 'center',
-	},
-	disabled: {
-		pointerEvents: 'none',
-	},
-	buttonContainer: {
-		display: 'grid',
-		gridGap: '12px',
-		gridTemplateColumns: '1fr 1fr',
-		gridTemplateAreas: "'a b'",
-	},
-	button: {
-		...primaryButton,
-	},
+const useStyles = makeStyles(theme => {
+	const type = theme.palette.type;
+
+	const styles = {
+		answerContainer: {
+			marginBottom: '12px',
+			padding: '16px 25px',
+			borderRadius: '9px',
+			display: 'flex',
+			backgroundColor: '#e5e8ef',
+			cursor: 'pointer',
+			fontFamily: 'Montserrat',
+		},
+		heading: {
+			marginBottom: '30px',
+			textAlign: 'center' as 'center',
+			fontFamily: 'Roboto Slab',
+		},
+		checkbox: {
+			width: 15,
+			marginRight: 10,
+		},
+
+		correctAnswer: {
+			backgroundColor: '#8fd8a0',
+		},
+		wrongAnswer: {
+			backgroundColor: '#ffa4a4',
+		},
+		score: {
+			marginTop: '20px',
+			textAlign: 'center' as 'center',
+		},
+		disabled: {
+			pointerEvents: 'none' as 'none',
+		},
+		buttonContainer: {
+			display: 'grid',
+			gridGap: '12px',
+			gridTemplateColumns: '1fr 1fr',
+			gridTemplateAreas: "'a b'",
+		},
+		button: {
+			...primaryButton,
+		},
+		box: {
+			backgroundColor: '#fff',
+		},
+	};
+
+	if (type === 'dark') {
+		styles.box.backgroundColor = '#2b303a';
+		styles.answerContainer.backgroundColor = '#464d5b';
+	}
+
+	return styles;
 });
 
 const getquestionDataStateArray = (
@@ -72,6 +89,18 @@ const Quiz: React.FC<QuestionAnswersProps> = ({
 	const contents = questionDataState[0][stepState[0]];
 
 	const classes = useStyles();
+
+	const checkUncheck = {
+		check: check,
+		uncheck: unCheck,
+	};
+
+	const theme = useTheme();
+	if (theme.palette.type === 'dark') {
+		checkUncheck.check = checkDark;
+		checkUncheck.uncheck = unCheckDark;
+	}
+
 	return (
 		<Container maxWidth="sm">
 			<div className={classes.score}>
@@ -83,7 +112,7 @@ const Quiz: React.FC<QuestionAnswersProps> = ({
 				</Typography>
 			</div>
 			<Box
-				style={{ backgroundColor: '#fff' }}
+				className={classes.box}
 				borderRadius={20}
 				my={'20px'}
 				p={'20px'}
@@ -96,7 +125,7 @@ const Quiz: React.FC<QuestionAnswersProps> = ({
 
 					const userSelectedAnswer = contents.userAnswer;
 
-					let image = unCheck;
+					let image = checkUncheck.uncheck;
 
 					// if user has selected any answer then disabled all the answers
 					if (userSelectedAnswer !== '') {
@@ -109,7 +138,7 @@ const Quiz: React.FC<QuestionAnswersProps> = ({
 						answer === contents.answer
 					) {
 						classNames = classNames + ' ' + classes.correctAnswer;
-						image = check;
+						image = checkUncheck.check;
 					}
 
 					// if the user has given the wrong answer then mark it as red
@@ -118,7 +147,7 @@ const Quiz: React.FC<QuestionAnswersProps> = ({
 						userSelectedAnswer !== contents.answer
 					) {
 						classNames = classNames + ' ' + classes.wrongAnswer;
-						image = unCheck;
+						image = checkUncheck.uncheck;
 					}
 
 					return (

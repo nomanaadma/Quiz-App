@@ -5,17 +5,4 @@ body {
 		'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background: url(./images/background.png) no-repeat center center fixed, #84899f29;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-size: 100% 100%;
 }
-
-.css-1vmnjpn-skeletonStyles-Skeleton {
-	background-color: #f3f4f8 !important;
-	background-image: linear-gradient( 90deg,#f3f4f8,#ffffff78,#f3f4f8 ) !important;
-	
-}
-
