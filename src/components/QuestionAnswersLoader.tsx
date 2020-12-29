@@ -1,6 +1,7 @@
 import Skeleton from 'react-loading-skeleton';
 import { Container, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { themeColorsCentral } from '../utils/Common';
 
 const useStyles = makeStyles(theme => {
 	const type = theme.palette.type;
@@ -12,20 +13,18 @@ const useStyles = makeStyles(theme => {
 			gridTemplateColumns: '1fr 1fr',
 		},
 		box: {
-			backgroundColor: '#fff',
+			backgroundColor: themeColorsCentral.boxLight,
 		},
 		skeleton: {
-			backgroundColor: '#f3f4f8 !important',
-			backgroundImage:
-				'linear-gradient( 90deg,#f3f4f8,#ffffff78,#f3f4f8 ) !important',
+			backgroundColor: `${themeColorsCentral.skeletonLight[0]} !important`,
+			backgroundImage: `linear-gradient( 90deg,${themeColorsCentral.skeletonLight[1]},${themeColorsCentral.skeletonLight[2]},${themeColorsCentral.skeletonLight[3]} ) !important`,
 		},
 	};
 
-	if (type === 'dark') {
-		styles.box.backgroundColor = '#2b303a';
-		styles.skeleton.backgroundColor = '#3c424f !important';
-		styles.skeleton.backgroundImage =
-			'linear-gradient( 90deg,#272b3817,#2f323e7a,#272b3817 ) !important';
+	if (type === themeColorsCentral.dark) {
+		styles.box.backgroundColor = themeColorsCentral.boxDark;
+		styles.skeleton.backgroundColor = `${themeColorsCentral.skeletonDark[0]} !important`;
+		styles.skeleton.backgroundImage = `linear-gradient( 90deg,${themeColorsCentral.skeletonDark[1]},${themeColorsCentral.skeletonDark[2]},${themeColorsCentral.skeletonDark[3]} ) !important`;
 	}
 
 	return styles;

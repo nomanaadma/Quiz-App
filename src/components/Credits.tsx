@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import heart from '../images/heart.png';
+import { themeColorsCentral } from '../utils/Common';
 
 const useStyles = makeStyles(theme => {
 	const type = theme.palette.type;
@@ -9,7 +10,10 @@ const useStyles = makeStyles(theme => {
 			fontFamily: 'Montserrat',
 			margin: 0,
 			paddingBottom: '28px',
-			color: type == 'dark' ? '#fff' : '#000',
+			color:
+				type == themeColorsCentral.dark
+					? themeColorsCentral.typoDark
+					: themeColorsCentral.typoLight,
 		},
 		img: {
 			width: '19px',

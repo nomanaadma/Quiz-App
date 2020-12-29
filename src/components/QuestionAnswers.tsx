@@ -5,7 +5,7 @@ import unCheck from '../images/uncheck.svg';
 import checkDark from '../images/check-dark.svg';
 import unCheckDark from '../images/uncheck-dark.svg';
 import { QuestionAnswersProps, Question } from '../types/QuizTypes';
-import { primaryButton, getScore } from '../utils/Common';
+import { primaryButton, getScore, themeColorsCentral } from '../utils/Common';
 import { decode } from 'he';
 
 const useStyles = makeStyles(theme => {
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => {
 			padding: '16px 25px',
 			borderRadius: '9px',
 			display: 'flex',
-			backgroundColor: '#e5e8ef',
+			backgroundColor: themeColorsCentral.answerLight,
 			cursor: 'pointer',
 			fontFamily: 'Montserrat',
 		},
@@ -54,13 +54,13 @@ const useStyles = makeStyles(theme => {
 			...primaryButton,
 		},
 		box: {
-			backgroundColor: '#fff',
+			backgroundColor: themeColorsCentral.boxLight,
 		},
 	};
 
-	if (type === 'dark') {
-		styles.box.backgroundColor = '#2b303a';
-		styles.answerContainer.backgroundColor = '#464d5b';
+	if (type === themeColorsCentral.dark) {
+		styles.box.backgroundColor = themeColorsCentral.boxDark;
+		styles.answerContainer.backgroundColor = themeColorsCentral.answerDark;
 	}
 
 	return styles;
@@ -96,7 +96,7 @@ const Quiz: React.FC<QuestionAnswersProps> = ({
 	};
 
 	const theme = useTheme();
-	if (theme.palette.type === 'dark') {
+	if (theme.palette.type === themeColorsCentral.dark) {
 		checkUncheck.check = checkDark;
 		checkUncheck.uncheck = unCheckDark;
 	}

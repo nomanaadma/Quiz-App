@@ -8,24 +8,25 @@ import QuestionAnswersLoader from './components/QuestionAnswersLoader';
 import Credits from './components/Credits';
 import Result from './components/Result';
 import { useState } from 'react';
-import { Question } from './types/QuizTypes';
+import { Question, ThemeTogglerProps } from './types/QuizTypes';
 import lightImage from './images/background-light.png';
 import darkImage from './images/background-dark.png';
+import { themeColorsCentral } from './utils/Common';
 
 const useStyles = makeStyles(theme => {
 	return {
 		body: {
 			background:
-				theme.palette.type === 'dark'
-					? `url(${darkImage}) no-repeat center center fixed, #20232a`
-					: `url(${lightImage}) no-repeat center center fixed, #84899f29`,
+				theme.palette.type === themeColorsCentral.dark
+					? `url(${darkImage}) no-repeat center center fixed, ${themeColorsCentral.bodyDark}`
+					: `url(${lightImage}) no-repeat center center fixed, ${themeColorsCentral.bodyLight}`,
 			backgroundSize: '100% 100%',
 			minHeight: '100vh',
 		},
 	};
 });
 
-function App() {
+const App: React.FC<ThemeTogglerProps> = props => {
 	const nameState = useState<string>('');
 	const categoryState = useState<number>(9);
 	const questionsLimitState = useState<number>(5);
@@ -45,7 +46,7 @@ function App() {
 	return (
 		<Box component="div" className={classes.body}>
 			<Container maxWidth="xl">
-				<Header />
+				<Header {...props} />
 				{settingState[0] && (
 					<QuizSettings
 						nameState={nameState}
@@ -82,6 +83,6 @@ function App() {
 			</Container>
 		</Box>
 	);
-}
+};
 
 export default App;

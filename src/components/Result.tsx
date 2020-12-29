@@ -2,18 +2,12 @@ import { Container, Typography, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { ResultProps } from '../types/QuizTypes';
 import { Categories } from '../services/QuizCategories';
-import { primaryButton, getScore } from '../utils/Common';
+import { primaryButton, getScore, themeColorsCentral } from '../utils/Common';
 
 const useStyles = makeStyles(theme => {
 	const type = theme.palette.type;
 
 	const styles = {
-		container: {
-			backgroundColor: '#fff',
-			borderRadius: '20px',
-			padding: '20px',
-			margin: '30px 0',
-		},
 		heading: {
 			marginBottom: '30px',
 			textAlign: 'center' as 'center',
@@ -42,12 +36,12 @@ const useStyles = makeStyles(theme => {
 			backgroundColor: '#cd3a28',
 		},
 		box: {
-			backgroundColor: '#fff',
+			backgroundColor: themeColorsCentral.boxLight,
 		},
 	};
 
-	if (type === 'dark') {
-		styles.box.backgroundColor = '#2b303a';
+	if (type === themeColorsCentral.dark) {
+		styles.box.backgroundColor = themeColorsCentral.boxDark;
 	}
 
 	return styles;

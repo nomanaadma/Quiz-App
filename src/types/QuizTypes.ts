@@ -50,3 +50,14 @@ export type ResultProps = {
 	setSetting: React.Dispatch<React.SetStateAction<boolean>>;
 	setStep: React.Dispatch<React.SetStateAction<number>>;
 };
+
+export type themeColorType = {
+	dark: 'dark';
+	light: 'light';
+	[x: string]: any | any[];
+};
+
+export type ThemeTogglerProps = {
+	darkTheme: boolean;
+	setDarkTheme: React.Dispatch<React.SetStateAction<boolean>>;
+};

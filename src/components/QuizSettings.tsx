@@ -14,7 +14,7 @@ import {
 import { Question } from '../types/QuizTypes';
 import { getQuizDetails } from '../services/QuizService';
 import { Categories } from '../services/QuizCategories';
-import { primaryButton } from '../utils/Common';
+import { primaryButton, themeColorsCentral } from '../utils/Common';
 
 const useStyles = makeStyles(theme => {
 	const type = theme.palette.type;
@@ -34,7 +34,10 @@ const useStyles = makeStyles(theme => {
 			...primaryButton,
 		},
 		box: {
-			backgroundColor: type == 'dark' ? '#2b303a' : '#fff',
+			backgroundColor:
+				type == themeColorsCentral.dark
+					? themeColorsCentral.boxDark
+					: themeColorsCentral.boxLight,
 		},
 	};
 });

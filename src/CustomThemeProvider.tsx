@@ -1,21 +1,31 @@
 import React, { useState } from 'react';
 import App from './App';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { themeColorsCentral } from './utils/Common';
 
 const CustomThemeProvider = () => {
-	const [themeColor, setThemeColor] = useState<string>('light');
+	const [darkTheme, setDarkTheme] = useState<boolean>(false);
 
 	const theme = React.useMemo(() => {
 		const typographyCodes = {
-			color: themeColor === 'dark' ? '#fff' : '#000',
+			color:
+				darkTheme === true
+					? themeColorsCentral.typoDark
+					: themeColorsCentral.typoLight,
 		};
 
 		return createMuiTheme({
 			palette: {
 				background: {
-					paper: themeColor === 'dark' ? '#282c34' : '#fff',
+					paper:
+						darkTheme === true
+							? themeColorsCentral.paperDark
+							: themeColorsCentral.paperLight,
 				},
-				type: themeColor === 'dark' ? 'dark' : 'light',
+				type:
+					darkTheme === true
+						? themeColorsCentral.dark
+						: themeColorsCentral.light,
 			},
 			typography: {
 				h5: typographyCodes,
@@ -24,21 +34,11 @@ const CustomThemeProvider = () => {
 				subtitle2: typographyCodes,
 			},
 		});
-	}, [themeColor]);
+	}, [darkTheme]);
 
 	return (
 		<ThemeProvider theme={theme}>
-			<button
-				type="button"
-				onClick={() => {
-					const newThemeColor =
-						themeColor === 'dark' ? 'light' : 'dark';
-					setThemeColor(newThemeColor);
-				}}
-			>
-				Change Theme
-			</button>
-			<App />
+			<App darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
 		</ThemeProvider>
 	);
 };
