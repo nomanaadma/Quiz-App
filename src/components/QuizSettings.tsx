@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => {
 		},
 		box: {
 			backgroundColor:
-				type == themeColorsCentral.dark
+				type === themeColorsCentral.dark
 					? themeColorsCentral.boxDark
 					: themeColorsCentral.boxLight,
 		},

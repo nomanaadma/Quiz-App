@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => {
 			margin: 0,
 			paddingBottom: '28px',
 			color:
-				type == themeColorsCentral.dark
+				type === themeColorsCentral.dark
 					? themeColorsCentral.typoDark
 					: themeColorsCentral.typoLight,
 		},
