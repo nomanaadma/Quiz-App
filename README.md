@@ -18,16 +18,8 @@ Project #6 for [Panacloud Bootcamp 2020](https://panacloud.github.io/bootcamp-20
 ## Functionalities
 
 -   Select Quiz Settings
+-   Light and Dark Theme Selector
 -   Perform Quiz and Get Results
-
-## Features
-
--   Secure
--   Accessibility Optimized
--   Fast
--   Less in size
--   SEO Optimized
--   Mobile Responsive
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
