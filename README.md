@@ -8,8 +8,6 @@ Project #6 for [Panacloud Bootcamp 2020](https://panacloud.github.io/bootcamp-20
 
 ![demo](https://raw.githubusercontent.com/nomanaadma/Quiz-App/master/public/screenshots/3.png)
 
-![demo](https://raw.githubusercontent.com/nomanaadma/Quiz-App/master/public/screenshots/4.png)
-
 ## Tech Stack
 
 -   [React](https://github.com/facebook/react/)
